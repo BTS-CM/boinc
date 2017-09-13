@@ -175,7 +175,7 @@ function get_logged_in_user($must_be_logged_in=true) {
             }
         }
         $next_url = urlencode($next_url);
-        if (strpos ($master_url, "SETI") !== false) {
+        if (strpos ($master_url, "seti") !== false) {
             Header("Location: ".url_base()."login_form.php?next_url=$next_url");
         } else {
             Header("Location: login_form.php?next_url=$next_url");
@@ -262,7 +262,7 @@ function page_head(
     $t = $title?$title:PROJECT;
     echo "<title>$t</title>\n";
        
-    if (strpos ($master_url, "SETI") !== false) {
+    if (strpos ($master_url, "seti") !== false) {
         echo '
             <meta charset="utf-8">
             <link type="text/css" rel="stylesheet" href="'.secure_url_base().'/bootstrap.min.css" media="all">
@@ -332,7 +332,7 @@ function page_tail(
 
     global $master_url;
 
-    if (strpos ($master_url, "SETI") !== false) {
+    if (strpos ($master_url, "seti") !== false) {
         echo '
             <script src="'.secure_url_base().'/jquery.min.js"></script>
             <script src="'.secure_url_base().'/bootstrap.min.js"></script>
