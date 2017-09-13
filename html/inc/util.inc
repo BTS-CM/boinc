@@ -34,7 +34,6 @@ require_once("../inc/bootstrap.inc");
 // parse some stuff from config (do it here for efficiency)
 //
 $config = get_config();
-$absolute_hyperlinks = parse_config($config , "<absolute_hyperlinks>");
 $master_url = parse_config($config , "<master_url>");
 $recaptcha_public_key = parse_config($config, "<recaptcha_public_key>");
 $recaptcha_private_key = parse_config($config, "<recaptcha_private_key>");
@@ -176,7 +175,7 @@ function get_logged_in_user($must_be_logged_in=true) {
             }
         }
         $next_url = urlencode($next_url);
-        if ($absolute_hyperlinks == True) {
+        if (strpos (master_url, "SETI") !== false) {
             Header("Location: ".url_base()."login_form.php?next_url=$next_url");
         } else {
             Header("Location: login_form.php?next_url=$next_url");
@@ -262,7 +261,7 @@ function page_head(
     $t = $title?$title:PROJECT;
     echo "<title>$t</title>\n";
        
-    if ($absolute_hyperlinks == True) {
+    if (strpos (master_url, "SETI") !== false) {
         echo '
             <meta charset="utf-8">
             <link type="text/css" rel="stylesheet" href="'.secure_url_base().'/bootstrap.min.css" media="all">
@@ -330,7 +329,7 @@ function page_tail(
 ) {
     project_footer($is_main, $show_date, $url_prefix);
 
-    if ($absolute_hyperlinks == True) {
+    if (strpos (master_url, "SETI") !== false) {
         echo '
             <script src="'.secure_url_base().'/jquery.min.js"></script>
             <script src="'.secure_url_base().'/bootstrap.min.js"></script>

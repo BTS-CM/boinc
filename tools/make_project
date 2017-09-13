@@ -29,21 +29,21 @@ Creates a new project with given name with everything running on a single
 server.
 
 Misc options:
-   --no_query              accept all directories without querying
-   --user_name             default: $USER (%(USER)s)
-   --delete_prev_inst      delete project-root first (from prev installation)
-   --drop_db_first         drop database first (from prev installation)
-   --test_app              install example application
-   --web_only              install web files, no executables (for Bossa, Bolt)
-   --no_db                 don't create the database
-   --srcdir                where to find the source files (default: current directory)
-   --absolute_hyperlinks   prepend url_base to hyperlinks (default: False)
+   --no_query           accept all directories without querying
+   --user_name          default: $USER (%(USER)s)
+   --delete_prev_inst   delete project-root first (from prev installation)
+   --drop_db_first      drop database first (from prev installation)
+   --test_app           install example application
+   --web_only           install web files, no executables (for Bossa, Bolt)
+   --no_db              don't create the database
+   --srcdir             where to find the source files (default: current directory)
 
 Dir-options:
    --project_root       default: HOME/projects/PROJECT
    --key_dir            default: PROJECT_ROOT/keys
    --project_host       default: $HOSTNAME (%(NODENAME)s)
    --url_base           default: http://PROJECT_HOST/
+
    --html_user_url      default: URL_BASE/PROJECT/
    --html_ops_url       default: URL_BASE/PROJECT_ops/
 
@@ -73,7 +73,6 @@ def usage():
 try:
     opts, args = getopt.getopt(sys.argv[1:],
         'hv', [
-            'absolute_hyperlinks=',
             'base=',
             'db_host=',
             'db_name=',
@@ -100,18 +99,16 @@ try:
 except getopt.GetoptError, e:
     syntax_error(e)
 
-options.absolute_hyperlinks = False
-options.delete_prev_inst = False
-options.no_db = False
-options.no_query = False
-options.srcdir = None
-options.test_app = False
 options.url_base = None
+options.no_query = False
+options.test_app = False
 options.web_only = False
+options.no_db = False
+options.delete_prev_inst = False
+options.srcdir = None
 
 for o,a in opts:
     if o == '-h' or o == '--help':        usage()
-    elif o == '--absolute_hyperlinks': options.absolute_hyperlinks = True
     elif o == '--db_host':       options.db_host        = a
     elif o == '--db_name':       options.db_name        = a
     elif o == '--db_passwd':     options.db_passwd      = a
@@ -197,7 +194,6 @@ for k in [
     'key_dir',
     'db_name',
     'db_host',
-    'absolute_hyperlinks',
     ]:
     print k.upper().rjust(15), "=", options.__dict__[k]
 
@@ -232,7 +228,6 @@ project = Project(
     host = options.project_host,
     web_only = options.web_only,
     no_db = options.no_db,
-    absolute_hyperlinks = options.absolute_hyperlinks,
     production = True
     )
 
